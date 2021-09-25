@@ -7,6 +7,8 @@ html, body {
 
 * {
   box-sizing: border-box;
+  /* 去掉轮播图浏览器警告 */
+  touch-action: pan-y;
 }
 
 
