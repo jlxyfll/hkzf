@@ -56,8 +56,9 @@ export default class Index extends React.Component {
          */
         swipers: [],
         isSwiperLoaded: false,
-        // data: ['1', '2', '3'],
-        // imgHeight: 176,
+
+        // 租房小组数据
+        groups: [],
     }
     // 获取轮播图数据的方法
     async getSwipers() {
@@ -70,8 +71,18 @@ export default class Index extends React.Component {
         })
     }
 
+    async getGroups() {
+        const res = await axios.get('http://127.0.0.1:8080/home/groups', {
+            params: {
+                area: 'AREA%7C88cff55c-aaa4-e2e0'
+            }
+        })
+        console.log(res)
+    }
+
     componentDidMount() {
         this.getSwipers()
+        this.getGroups()
     }
     // 轮播图
     renderSwipers() {
