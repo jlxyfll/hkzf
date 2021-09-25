@@ -1,5 +1,5 @@
 import React from "react";
-import { Carousel, Flex, WhiteSpace } from 'antd-mobile';
+import { Carousel, Flex, Grid } from 'antd-mobile';
 import axios from "axios";
 
 
@@ -77,7 +77,9 @@ export default class Index extends React.Component {
                 area: 'AREA%7C88cff55c-aaa4-e2e0'
             }
         })
-        console.log(res)
+        this.setState({
+            groups: res.data.body
+        })
     }
 
     componentDidMount() {
@@ -111,6 +113,24 @@ export default class Index extends React.Component {
             </Flex.Item>)
         )
     }
+
+    renderGroups() {
+        return (
+            item => <Flex
+                className='group-item'
+                justify='around'
+                key={item.id}>
+                <div className='desc'>
+                    <p className='title'>{item.title}</p>
+                    <span className='info'>{item.desc}</span>
+                </div>
+                <img
+                    src={`http://localhost:8080${item.imgSrc}`}
+                    alt=''
+                />
+            </Flex>
+        )
+    }
     render() {
         return (
             <div className='index'>
@@ -130,6 +150,23 @@ export default class Index extends React.Component {
                 <Flex className='nav'>
                     {this.renderNavs()}
                 </Flex>
+                {/* 租房小组 */}
+                <div className='group'>
+                    <h3 className='group-title'>
+                        租房小组
+                        <span className='more'>
+                            更多
+                        </span>
+                    </h3>
+                    {/* 宫格组件 */}
+                    <Grid
+                        data={this.state.groups}
+                        columnNum={2}
+                        square={false}
+                        hasLine={false}
+                        renderItem={this.renderGroups()}
+                    />
+                </div>
             </div>
         );
     }

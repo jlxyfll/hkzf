@@ -1,5 +1,4 @@
 import React from "react";
-import { Button } from 'antd-mobile'
 
 import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom'
 import Home from './pages/Home'
