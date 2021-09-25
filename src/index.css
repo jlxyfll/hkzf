@@ -1,14 +1,17 @@
-html, body {
-  height: 100%;
-  font-family: 'Microsoft YaHei';
-  color: #333;
-  background-color: #fff;
+html,
+body {
+    height: 100%;
+    font-family: 'Microsoft YaHei';
+    color: #333;
+    background-color: #fff;
 }
 
 * {
-  box-sizing: border-box;
-  /* 去掉轮播图浏览器警告 */
-  touch-action: pan-y;
+    box-sizing: border-box;
+    /* 去掉轮播图浏览器警告 */
+    touch-action: pan-y;
 }
 
-
+h2 {
+    margin: 0;
+}

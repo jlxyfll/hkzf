@@ -36,6 +36,17 @@ const tabItems = [
     },
 ]
 
+
+/**
+ * 问题：点击首页导航菜单，导航到找房列表页面时，找房菜单没有高亮
+ * 原因：原来我们实现该功能的额时候，只考虑了点击以及第一次加载Home组件的情况，但是，我们没有考虑不重新加载Home组件时的路由切换，因为，这种情况下，我们的迪马没有覆盖到
+ * (路由切换而组件没有重新加载)
+ * 解决：
+ *  思路：在路由切换时，也执行菜单高亮的逻辑代码
+ *  钩子函数：添加componentDidUpdate
+ *  在钩子函数中判断路由地址是否切换(因为路由的信息是通过props传递各组件的，所以通过更新前后的两个props)
+ *  在路由地址切换时，让菜单高亮
+ */
 export default class Home extends React.Component {
     state = {
         // 默认选中
@@ -47,6 +58,16 @@ export default class Home extends React.Component {
         fullScreen: false, */
     };
 
+    componentDidUpdate(prevProps) {
+        console.log('上一次的路由信息', prevProps);
+        console.log('当前的路由信息', this.props);
+        if (prevProps.location.pathname !== this.props.location.pathname) {
+            this.setState({
+                selectedTab: this.props.location.pathname
+            })
+        }
+    }
+    
     renderTaBarItem() {
         return (
             tabItems.map(item => <TabBar.Item
